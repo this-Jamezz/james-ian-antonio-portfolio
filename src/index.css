@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-montserrat: "Montserrat", sans-serif;
+
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: #fafaf8;
+  --color-primary: #000000;
+  --color-accent: #00008b;
+  --color-border: rgba(0, 0, 0, 0.08);
+}
+
+
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+  
+  body {
+    @apply bg-bg transition-colors duration-300;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .glass-nav {
+    @apply bg-white/70 backdrop-blur-[20px] border border-border shadow-[0_4px_24px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.5)];
+  }
+  
+  .nav-link {
+    @apply relative font-medium transition-colors duration-200;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-[-4px] left-0 h-[2px] bg-accent transition-all duration-300;
+    width: 0;
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+  
+  .animate-dropdown {
+    animation: dropdown 0.25s ease-out;
+  }
+
+  .animate-enter {
+    opacity: 0;
+    animation: enter 0.7s ease-out forwards;
+  }
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes dropdown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
