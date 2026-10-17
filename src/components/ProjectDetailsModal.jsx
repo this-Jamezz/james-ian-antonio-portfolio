@@ -72,9 +72,14 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
           </button>
         </div>
 
-        {/* thumbnail */}
+        {/* thumbnail — capped so the panel fits the viewport without scrolling */}
         <div className="mt-4">
-          <ProjectPreviewCard src={project.src} label={project.label} showChrome />
+          <ProjectPreviewCard
+            src={project.src}
+            label={project.label}
+            showChrome
+            className="mx-auto max-w-sm"
+          />
         </div>
 
         {/* title + status */}
