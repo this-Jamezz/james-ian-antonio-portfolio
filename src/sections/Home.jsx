@@ -44,7 +44,7 @@ export default function Home() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/jamesian.antonio.581"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook profile"
@@ -54,7 +54,7 @@ export default function Home() {
                 <img src="/assets/facebook.svg" alt="" className="h-6 w-6" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/jamezz_iyann/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram profile"
@@ -64,7 +64,7 @@ export default function Home() {
                 <img src="/assets/instagram.svg" alt="" className="h-6 w-6" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/james-ian-antonio-73b844367/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn profile"
@@ -74,7 +74,7 @@ export default function Home() {
                 <img src="/assets/linkedin.svg" alt="" className="h-6 w-6" />
               </a>
               <a
-                href="#"
+                href="https://github.com/this-Jamezz"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub profile"
@@ -84,7 +84,7 @@ export default function Home() {
                 <img src="/assets/github.svg" alt="" className="h-6 w-6" />
               </a>
               <a
-                href="#"
+                href="https://ph.jobstreet.com/profiles/jamesian-antonio-9zq6gj4387"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="JobStreet profile"

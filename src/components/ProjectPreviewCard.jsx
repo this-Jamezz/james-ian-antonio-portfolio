@@ -11,9 +11,13 @@ export default function ProjectPreviewCard({ src, label, alt, className = '', sh
         </div>
       )}
 
-      <div className="flex aspect-[4/3] w-full items-center justify-center bg-linear-to-br from-black/5 to-accent/10">
+      <div
+        className={`flex w-full items-center justify-center bg-linear-to-br from-black/5 to-accent/10 ${
+          src ? '' : 'aspect-[4/3]'
+        }`}
+      >
         {src ? (
-          <img src={src} alt={alt || label} className="h-full w-full object-cover" />
+          <img src={src} alt={alt || label} className="block h-auto w-full" />
         ) : (
           <div className="flex flex-col items-center gap-1.5 text-primary/50">
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

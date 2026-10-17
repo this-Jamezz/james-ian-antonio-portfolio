@@ -16,10 +16,10 @@ export default function Contacts() {
             href="mailto:youremail@example.com"
             className="rounded-xl bg-primary px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
-            youremail@example.com
+            j.iansanchezantonio@gmail.com
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/james-ian-antonio-73b844367"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-primary/20 bg-white/70 px-6 py-3 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"

@@ -56,6 +56,7 @@ const techGroups = [
     items: [
       { name: 'Claude', icon: `${SIMPLE}/claude` },
       { name: 'ChatGPT', icon: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg' },
+      { name: 'Gemini', icon: `${SIMPLE}/googlegemini` },
       { name: 'ClickUp', icon: `${SIMPLE}/clickup` },
     ],
   },

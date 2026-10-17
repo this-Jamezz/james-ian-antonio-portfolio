@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import pfp from '../assets/pfp.jpg';
+import ResumeButton from './ResumeButton';
 import { scrollToSectionId } from '../lib/smooth-scroll';
 
 const navItems = [
@@ -103,17 +104,9 @@ export default function Navbar() {
 
         {/* Right: CV Download + Mobile Menu Button */}
         <div className="flex items-center gap-2 relative">
-          <a
-            href="#"
+          <ResumeButton
             className="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-white text-sm font-bold cursor-pointer transition-all duration-200 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            download
-            aria-label="Download CV"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            <span>Download CV</span>
-          </a>
+          />
 
           {/* Mobile Menu Button (hidden on lg+) */}
           <button
@@ -167,17 +160,9 @@ export default function Navbar() {
               </nav>
               {/* Download CV in Mobile Dropdown */}
               <div className="px-2 pt-2 border-t border-border">
-                <a
-                  href="#"
+                <ResumeButton
                   className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-primary cursor-pointer transition-all duration-200 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg active:scale-95"
-                  download
-                  aria-label="Download CV"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  <span>Download CV</span>
-                </a>
+                />
               </div>
             </div>
           )}

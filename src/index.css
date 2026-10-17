@@ -67,6 +67,10 @@
     animation: enter 0.7s ease-out forwards;
   }
 
+  .animate-modal {
+    animation: modal 0.25s ease-out;
+  }
+
   @keyframes enter {
     from {
       opacity: 0;
@@ -85,6 +89,16 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  @keyframes modal {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 }
