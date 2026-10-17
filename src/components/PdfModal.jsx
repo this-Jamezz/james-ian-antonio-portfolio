@@ -1,6 +1,12 @@
 import { createPortal } from 'react-dom';
 import useModalDismiss from '../lib/use-modal';
 import { PDF_PREVIEW_PARAMS } from '../lib/pdf';
+import useMediaQuery from '../lib/use-media-query';
+
+// Touch browsers (notably Chrome on Android) promote an embedded PDF frame to a
+// full-page navigation, which would blow the dialog away. There we hand the PDF
+// to the device viewer explicitly instead.
+const CAN_EMBED_PDF = '(hover: hover) and (pointer: fine)';
 
 /**
  * Generic PDF preview dialog — used for the résumé and for certificates.
@@ -9,6 +15,7 @@ import { PDF_PREVIEW_PARAMS } from '../lib/pdf';
  */
 export default function PdfModal({ open, src, label, title, downloadName, onClose }) {
   const panelRef = useModalDismiss(open, onClose);
+  const canEmbed = useMediaQuery(CAN_EMBED_PDF);
 
   if (!open || typeof document === 'undefined') return null;
 
@@ -74,11 +81,36 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
             <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
             <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
           </div>
-          <iframe
-            src={`${src}${PDF_PREVIEW_PARAMS}`}
-            title={`Preview of ${title}`}
-            className="h-[52vh] w-full bg-white"
-          />
+          {canEmbed ? (
+            <iframe
+              src={`${src}${PDF_PREVIEW_PARAMS}`}
+              title={`Preview of ${title}`}
+              className="h-[52vh] w-full bg-white"
+            />
+          ) : (
+            /* no inline viewer here — point at the device's own PDF viewer */
+            <div className="flex h-[52vh] w-full flex-col items-center justify-center gap-2 bg-white px-6 text-center">
+              <svg
+                className="h-8 w-8 text-accent"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 14.25v-2.63c0-1.14-.93-2.06-2.06-2.06h-1.88a1.13 1.13 0 0 1-1.13-1.13V6.63c0-1.14-.93-2.06-2.07-2.06H7.5M9 4.5h5.25L19.5 9v10.13c0 .69-.56 1.25-1.25 1.25H9c-.69 0-1.25-.56-1.25-1.25V5.75C7.75 5.06 8.31 4.5 9 4.5Z"
+                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 14.25h4.5v4.5h-4.5z" />
+              </svg>
+              <span className="text-xs font-semibold uppercase tracking-widest text-primary/40">PDF</span>
+              <p className="text-sm font-medium text-primary/60">
+                Open it in your device's PDF viewer.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* footer actions */}

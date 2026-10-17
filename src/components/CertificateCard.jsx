@@ -2,15 +2,60 @@ import { useState } from 'react';
 import PdfModal from './PdfModal';
 import ImageModal from './ImageModal';
 import { PDF_PREVIEW_PARAMS } from '../lib/pdf';
+import useMediaQuery from '../lib/use-media-query';
+
+// Chrome on Android hands PDFs to its native viewer and promotes the frame to a
+// top-level navigation, which kicks the visitor out of the page into a new tab.
+// Only embed a PDF where the primary input can hover — i.e. real desktops.
+const CAN_EMBED_PDF = '(hover: hover) and (pointer: fine)';
+
+/** Page-shaped stand-in for devices that must not embed the PDF. */
+function PdfPlaceholder() {
+  return (
+    <div className="flex h-full w-full items-center justify-center p-6">
+      <div className="flex w-full max-w-56 flex-col overflow-hidden rounded-xl border border-border bg-white">
+        <div
+          className="flex items-center gap-1 border-b border-border bg-primary/5 px-2.5 py-1.5"
+          aria-hidden="true"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
+          <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+          <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
+        </div>
+        <div className="flex flex-1 flex-col items-center gap-2 px-4 py-5 text-center">
+          <svg
+            className="h-7 w-7 text-accent"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 14.25v-2.63c0-1.14-.93-2.06-2.06-2.06h-1.88a1.13 1.13 0 0 1-1.13-1.13V6.63c0-1.14-.93-2.06-2.07-2.06H7.5M9 4.5h5.25L19.5 9v10.13c0 .69-.56 1.25-1.25 1.25H9c-.69 0-1.25-.56-1.25-1.25V5.75C7.75 5.06 8.31 4.5 9 4.5Z"
+            />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 14.25h4.5v4.5h-4.5z" />
+          </svg>
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/40">PDF</span>
+          <span className="text-xs font-medium text-primary/60">Tap to preview</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function CertificateCard({ cert }) {
   const [previewOpen, setPreviewOpen] = useState(false);
+  const canHover = useMediaQuery(CAN_EMBED_PDF);
 
   const hasPdf = Boolean(cert.pdf);
   const hasSrc = Boolean(cert.src);
   const hasLink = Boolean(cert.link) && cert.link !== '#';
   // a PDF previews inline in the card; an image needs the modal to be seen at all
   const canPreview = hasPdf || hasSrc;
+  const embedPdf = hasPdf && canHover;
 
   const downloadName = `${cert.title} ${cert.issuer} ${cert.year}.pdf`
     .replace(/\s+/g, ' ')
@@ -28,14 +73,16 @@ export default function CertificateCard({ cert }) {
               loading="lazy"
               className="h-full w-full bg-white object-contain"
             />
-          ) : hasPdf ? (
-            /* live page-1 preview straight from the PDF — no extra image asset */
+          ) : embedPdf ? (
+            /* live page-1 preview straight from the PDF — desktop pointers only */
             <iframe
               src={`${cert.pdf}${PDF_PREVIEW_PARAMS}`}
               title={`Preview of ${cert.title} certificate`}
               loading="lazy"
               className="h-full w-full border-0 bg-white"
             />
+          ) : hasPdf ? (
+            <PdfPlaceholder />
           ) : (
             <div className="flex flex-col items-center gap-1.5 px-4 text-center text-primary/40">
               <svg
@@ -56,30 +103,37 @@ export default function CertificateCard({ cert }) {
             </div>
           )}
 
-          {/* hover/focus reveal — opens the full-size preview */}
+          {/* hover/focus reveal — opens the full-size preview. Touch devices
+              have no hover, so the pill is dropped and the tap gets a tint. */}
           {canPreview && (
             <button
               type="button"
               onClick={() => setPreviewOpen(true)}
               aria-label={`Preview ${cert.title} certificate`}
-              className="absolute inset-0 z-10 flex cursor-pointer items-center justify-center bg-primary/0 opacity-0 transition-opacity duration-200 hover:bg-primary/20 hover:opacity-100 focus-visible:bg-primary/20 focus-visible:opacity-100"
+              className={`absolute inset-0 z-10 flex cursor-pointer items-center justify-center transition-colors duration-200 ${
+                canHover
+                  ? 'bg-primary/0 opacity-0 hover:bg-primary/20 hover:opacity-100 focus-visible:bg-primary/20 focus-visible:opacity-100'
+                  : 'bg-primary/0 active:bg-primary/15'
+              }`}
             >
-              <span className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white shadow-lg">
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                  <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </svg>
-                Preview
-              </span>
+              {canHover && (
+                <span className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white shadow-lg">
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                    <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  </svg>
+                  Preview
+                </span>
+              )}
             </button>
           )}
 
