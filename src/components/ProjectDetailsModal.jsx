@@ -45,7 +45,7 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
         aria-modal="true"
         aria-labelledby="details-title"
         aria-describedby="details-desc"
-        className="animate-modal relative flex max-h-[88vh] w-full max-w-2xl flex-col overflow-y-auto rounded-2xl border border-border bg-white/60 p-6 shadow-lg backdrop-blur-md"
+        className="animate-modal relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-y-auto rounded-2xl border border-border bg-white/60 p-5 shadow-lg backdrop-blur-md"
       >
         {/* header */}
         <div className="flex items-start justify-between gap-4">
@@ -73,17 +73,17 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
         </div>
 
         {/* thumbnail — capped so the panel fits the viewport without scrolling */}
-        <div className="mt-4">
+        <div className="mt-3">
           <ProjectPreviewCard
             src={project.src}
             label={project.label}
             showChrome
-            className="mx-auto max-w-sm"
+            className="mx-auto max-w-[16rem]"
           />
         </div>
 
         {/* title + status */}
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
           <h2
             id="details-title"
             className="text-2xl font-semibold tracking-tight text-primary"
@@ -99,7 +99,7 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
         </p>
 
         {/* full tech stack */}
-        <h3 className="mt-5 text-xs font-semibold uppercase tracking-widest text-primary/50">
+        <h3 className="mt-4 text-xs font-semibold uppercase tracking-widest text-primary/50">
           Tech stack
         </h3>
         <ul className="mt-2 flex flex-wrap gap-2" aria-label={`${project.title} full tech stack`}>
@@ -114,7 +114,7 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
         </ul>
 
         {/* live site CTA */}
-        <div className="mt-6">
+        <div className="mt-5">
           {isLive ? (
             <button
               type="button"
@@ -147,7 +147,7 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
 
         {/* pager — browse every project, including the ones not shown in the grid */}
         {hasNav && (
-          <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+          <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
             <button
               type="button"
               onClick={() => goTo(index - 1)}
