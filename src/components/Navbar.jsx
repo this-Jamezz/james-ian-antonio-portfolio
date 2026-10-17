@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 glass-nav rounded-2xl px-4 py-3 w-full max-w-5xl shadow-xl flex items-center justify-between"
+        className="fixed top-6 inset-x-2 mx-auto z-50 glass-nav rounded-2xl px-4 py-3 w-auto max-w-5xl shadow-xl flex items-center justify-between"
         role="navigation"
         aria-label="Main navigation"
       >

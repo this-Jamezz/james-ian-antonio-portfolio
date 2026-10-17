@@ -4,8 +4,9 @@ import { scrollToSectionId } from '../lib/smooth-scroll';
 export default function Home() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center px-6 bg-bg overflow-hidden">
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-14 max-w-5xl w-full">
-        <div className="flex-1 min-w-0 flex flex-col items-center md:items-start text-center md:text-left gap-6 md:gap-8">
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0 max-w-5xl w-full">
+        {/* md:-mr-56 pulls the text column into the portrait so the text overlaps ~70% of it */}
+        <div className="flex-1 min-w-0 flex flex-col items-center md:items-start text-center md:text-left gap-6 md:gap-8 md:-mr-56">
           <div className="flex flex-col items-center md:items-start text-4xl md:text-6xl font-black tracking-tight text-primary animate-enter [animation-delay:50ms]">
             <p> I solve real-life problems, {" "}</p>
             <span className="relative w-fit text-accent">
@@ -101,23 +102,10 @@ export default function Home() {
         <div className="shrink-0 animate-enter [animation-delay:150ms]">
           <div className="group relative w-56 md:w-80">
             <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl bg-accent/10 transition-transform duration-500 group-hover:translate-x-4 group-hover:translate-y-4" aria-hidden="true"></div>
-            <img src={heroIcon} alt="Portrait of James Ian Antonio" className="relative aspect-[4/5] w-full rounded-3xl bg-white/40 object-cover object-top shadow-lg transition-transform duration-500 group-hover:scale-[1.015]" />
+            <img src={heroIcon} alt="Portrait of James Ian Antonio" className="relative aspect-[4/5] w-full rounded-3xl bg-white/40 object-cover object-top opacity-70 shadow-lg transition-[transform,opacity] duration-500 group-hover:-translate-y-1 group-hover:scale-[1.02] group-hover:opacity-100" />
           </div>
         </div>
       </div>
-      <a
-        href="#experience"
-        onClick={(e) => {
-          e.preventDefault();
-          scrollToSectionId('experience');
-        }}
-        aria-label="Scroll to Experience section"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary/40 transition-[color,transform] duration-200 hover:translate-y-0.5 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      >
-        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m19.5 13.5-7.5 7.5-7.5-7.5M12 21V3" />
-        </svg>
-      </a>
     </section>
   );
 }

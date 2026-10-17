@@ -1,23 +1,24 @@
 import ProjectPreviewCard from '../components/ProjectPreviewCard';
+import FoundNestThumbNail from '../assets/FoundNestThumbNail.jpg';
 
 // TODO: replace with your real projects — set `src` to a screenshot in public/
 const projects = [
   {
-    label: 'Project One',
-    src: null,
-    title: 'Project One',
-    description: 'One or two lines on what it does and who it serves. Replace with your real project.',
-    tech: ['React', 'Node.js', 'PostgreSQL'],
-    link: '#',
-  },
-  {
-    label: 'Project Two',
-    src: null,
-    title: 'Project Two',
-    description: 'One or two lines on what it does and who it serves. Replace with your real project.',
-    tech: ['Next.js', 'Tailwind CSS'],
-    link: '#',
-  },
+  label: 'FoundNest',
+  src: FoundNestThumbNail,
+  title: 'FoundNest',
+  description: 'A cross-platform lost and found management system utilizing AI image matching and QR smart tagging to streamline item recovery for users.',
+  tech: ['React', 'React Native', 'Node.js', 'PostgreSQL'],
+  link: 'https://foundnest.vercel.app/',
+},
+{
+  label: 'ClinicMate',
+  src: null,
+  title: 'ClinicMate',
+  description: 'A responsive clinic management system utilizing Firebase and Tailwind CSS to centralize patient records and optimize clinic operations.',
+  tech: ['React.js', 'Tailwind CSS', 'Firebase'],
+  link: '#',
+},
   {
     label: 'Project Three',
     src: null,

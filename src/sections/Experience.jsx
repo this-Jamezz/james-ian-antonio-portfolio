@@ -1,23 +1,18 @@
 // TODO: replace with your real experience — most recent first
 const roles = [
   {
-    title: 'Job Title',
-    company: 'Company Name',
-    period: '2024 — Present',
-    description: 'One or two lines on what you did and the impact you had. Replace with your real experience.',
+    title: 'Salesforce Virtual Internship',
+    company: 'Salesforce',
+    period: 'Oct 2025 — Dec 2025',
+    description: 'Completed a virtual internship focused on Salesforce ecosystem fundamentals, Trailhead learning, and hands-on project development.',
   },
   {
-    title: 'Job Title',
-    company: 'Company Name',
-    period: '2022 — 2024',
-    description: 'One or two lines on what you did and the impact you had. Replace with your real experience.',
+    title: 'Freelance Web Developer',
+    company: 'Freelance',
+    period: '2026 — Present',
+    description: 'Provided custom web development services to clients, delivering responsive and user-friendly websites using modern technologies.',
   },
-  {
-    title: 'Job Title',
-    company: 'Company Name',
-    period: '2021 — 2022',
-    description: 'One or two lines on what you did and the impact you had. Replace with your real experience.',
-  },
+
 ];
 
 export default function Experience() {
