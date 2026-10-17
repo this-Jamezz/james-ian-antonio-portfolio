@@ -1,5 +1,5 @@
 import ProjectPreviewCard from '../components/ProjectPreviewCard';
-import FoundNestThumbNail from '../assets/FoundNestThumbNail.jpg';
+import FoundNestThumbNail from '../assets/FoundNestThumbnail.jpg';
 
 // TODO: replace with your real projects — set `src` to a screenshot in public/
 const projects = [
