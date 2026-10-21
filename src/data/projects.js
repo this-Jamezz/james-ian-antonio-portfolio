@@ -29,7 +29,7 @@ export const projects = [
     description:
       'An AI-powered project management platform featuring collaborative workspaces, drag-and-drop Kanban boards, and real-time task updates.',
     tech: ['React', 'Tailwind CSS', 'TypeScript', 'Express', 'PostgreSQL', 'Prisma', 'Gemini AI'],
-    link: '#',
+    link: 'https://imanage-projectmanager.vercel.app/',
   },
 ];
 
