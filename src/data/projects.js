@@ -39,5 +39,5 @@ export const VISIBLE_TECH_COUNT = 3;
 
 // A project counts as deployed only when it has a real URL — '#'/null/'' do not.
 export function isProjectLive(project) {
-  return Boolean(project.link) && project.link !== '#';
+  return Boolean(project.link) && project.link !== '#' ;
 }
