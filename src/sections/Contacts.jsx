@@ -7,8 +7,7 @@ export default function Contacts() {
           Let's build something together
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-mute">
-          Currently open to internships, freelance work, and junior roles. Replace this line with your
-          real availability.
+          Currently open to internships, freelance work, and junior roles.
         </p>
         {/* TODO: replace "#" with your real email and profile URLs */}
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
