@@ -24,10 +24,10 @@ export default function ConfirmRedirectModal({ open, project, onConfirm, onCance
         aria-modal="true"
         aria-labelledby="redirect-title"
         aria-describedby="redirect-desc"
-        className="animate-modal relative w-full max-w-sm rounded-2xl border border-border bg-white/60 p-6 shadow-lg backdrop-blur-md"
+        className="animate-modal relative w-full max-w-sm rounded-2xl border border-border bg-surface/60 p-6 shadow-lg backdrop-blur-md"
       >
         {/* techy catch: terminal-style label */}
-        <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+        <p className="text-xs font-semibold uppercase tracking-widest text-mute">
           Leave site
         </p>
 
@@ -35,7 +35,7 @@ export default function ConfirmRedirectModal({ open, project, onConfirm, onCance
           Open {project.title}?
         </h2>
 
-        <p id="redirect-desc" className="mt-3 text-sm leading-relaxed text-primary/70">
+        <p id="redirect-desc" className="mt-3 text-sm leading-relaxed text-mute">
           You&apos;re about to visit the live deployment in a new tab.
         </p>
 
@@ -43,7 +43,7 @@ export default function ConfirmRedirectModal({ open, project, onConfirm, onCance
           <button
             type="button"
             onClick={onCancel}
-            className="rounded-xl border border-primary/20 bg-white/60 px-5 py-2.5 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="rounded-xl border border-primary/20 bg-surface/60 px-5 py-2.5 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             Cancel
           </button>
@@ -51,7 +51,7 @@ export default function ConfirmRedirectModal({ open, project, onConfirm, onCance
             ref={confirmRef}
             type="button"
             onClick={onConfirm}
-            className="rounded-xl bg-accent px-5 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent/85 hover:shadow-lg hover:shadow-accent/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-bg transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/85 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             Open live site
           </button>

@@ -9,7 +9,7 @@ const roles = [
   {
     title: 'Freelance Web Developer',
     company: 'Freelance',
-    period: '2026 — Present',
+    period: 'Jan 2026 — Present',
     description: 'Provided custom web development services to clients, delivering responsive and user-friendly websites using modern technologies.',
   },
 
@@ -19,7 +19,7 @@ export default function Experience() {
   return (
     <section id="experience" className="min-h-screen scroll-mt-24 px-6 py-24 flex items-center justify-center">
       <div className="mx-auto w-full max-w-5xl">
-        <p className="text-xs font-semibold uppercase tracking-widest text-accent">Experience</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-mute">Experience</p>
         <h2 className="mt-3 text-4xl font-semibold tracking-tight text-primary md:text-5xl">
           Where I&rsquo;ve worked
         </h2>
@@ -31,10 +31,10 @@ export default function Experience() {
             >
               <div>
                 <h3 className="font-bold text-primary">{role.title}</h3>
-                <p className="text-sm text-primary/60">{role.company}</p>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-primary/70">{role.description}</p>
+                <p className="text-sm text-mute">{role.company}</p>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-mute">{role.description}</p>
               </div>
-              <span className="text-sm tabular-nums text-primary/50">{role.period}</span>
+              <span className="text-sm tabular-nums text-mute-2">{role.period}</span>
             </li>
           ))}
         </ol>

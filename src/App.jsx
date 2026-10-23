@@ -27,7 +27,7 @@ function App() {
         <Contacts />
       </div>
       <footer className="border-t border-border px-6 py-8">
-        <p className="text-center text-sm text-primary/60">
+        <p className="text-center text-sm text-mute">
           © {year} James Ian Antonio
         </p>
       </footer>

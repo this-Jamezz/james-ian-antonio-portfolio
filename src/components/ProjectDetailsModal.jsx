@@ -45,18 +45,18 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
         aria-modal="true"
         aria-labelledby="details-title"
         aria-describedby="details-desc"
-        className="animate-modal relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-y-auto rounded-2xl border border-border bg-white/60 p-5 shadow-lg backdrop-blur-md"
+        className="animate-modal relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-y-auto rounded-2xl border border-border bg-surface/60 p-5 shadow-lg backdrop-blur-md"
       >
         {/* header */}
         <div className="flex items-start justify-between gap-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+          <p className="text-xs font-semibold uppercase tracking-widest text-mute">
             Project details
           </p>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="-mt-1.5 -mr-1.5 shrink-0 rounded-xl border border-primary/15 bg-white/60 p-2 text-primary/60 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-primary active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="-mt-1.5 -mr-1.5 shrink-0 rounded-xl border border-primary/15 bg-surface/60 p-2 text-mute backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface hover:text-primary active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <svg
               className="h-4 w-4"
@@ -94,19 +94,19 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
         </div>
 
         {/* description */}
-        <p id="details-desc" className="mt-3 text-sm leading-relaxed text-primary/70">
+        <p id="details-desc" className="mt-3 text-sm leading-relaxed text-mute">
           {project.description}
         </p>
 
         {/* full tech stack */}
-        <h3 className="mt-4 text-xs font-semibold uppercase tracking-widest text-primary/50">
+        <h3 className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute-2">
           Tech stack
         </h3>
         <ul className="mt-2 flex flex-wrap gap-2" aria-label={`${project.title} full tech stack`}>
           {project.tech.map((item) => (
             <li
               key={item}
-              className="rounded-full border border-border bg-white/60 px-3 py-0.5 text-xs font-medium text-primary/70"
+              className="rounded-full border border-border bg-surface/60 px-3 py-0.5 text-xs font-medium text-mute"
             >
               {item}
             </li>
@@ -120,7 +120,7 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
               type="button"
               onClick={() => setConfirmOpen(true)}
               aria-haspopup="dialog"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent/85 hover:shadow-lg hover:shadow-accent/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-bg transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/85 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <svg
                 className="h-4 w-4"
@@ -139,7 +139,7 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
               Open live site
             </button>
           ) : (
-            <span className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-primary/15 bg-white/40 px-5 py-3 text-sm font-bold text-primary/40 backdrop-blur-md">
+            <span className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-primary/15 bg-surface/40 px-5 py-3 text-sm font-bold text-mute-2 backdrop-blur-md">
               Not deployed yet
             </span>
           )}
@@ -151,7 +151,7 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
             <button
               type="button"
               onClick={() => goTo(index - 1)}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-primary/20 bg-white/60 px-4 py-2 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-primary/20 bg-surface/60 px-4 py-2 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <svg
                 className="h-4 w-4"
@@ -168,14 +168,14 @@ export default function ProjectDetailsModal({ open, projects, index, onIndexChan
               Prev
             </button>
 
-            <span className="text-xs font-medium tracking-wide text-primary/50">
+            <span className="text-xs font-medium tracking-wide text-mute-2">
               {index + 1} / {projects.length}
             </span>
 
             <button
               type="button"
               onClick={() => goTo(index + 1)}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-primary/20 bg-white/60 px-4 py-2 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-primary/20 bg-surface/60 px-4 py-2 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Next
               <svg

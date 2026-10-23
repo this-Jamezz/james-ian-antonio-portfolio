@@ -1,25 +1,25 @@
 export default function ProjectPreviewCard({ src, label, alt, className = '', showChrome = false }) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-border bg-white/80 shadow-[0_8px_24px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04)] ${className}`}
+      className={`overflow-hidden rounded-2xl border border-border bg-surface/80 shadow-[0_8px_24px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04)] ${className}`}
     >
       {showChrome && (
-        <div className="flex items-center gap-1 border-b border-border bg-white/60 px-2.5 py-1.5" aria-hidden="true">
-          <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
-          <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-          <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
+        <div className="flex items-center gap-1 border-b border-border bg-surface/60 px-2.5 py-1.5" aria-hidden="true">
+          <span className="h-1.5 w-1.5 rounded-full bg-info" />
+          <span className="h-1.5 w-1.5 rounded-full bg-info" />
+          <span className="h-1.5 w-1.5 rounded-full bg-info" />
         </div>
       )}
 
       <div
-        className={`flex w-full items-center justify-center bg-linear-to-br from-black/5 to-accent/10 ${
+        className={`flex w-full items-center justify-center bg-linear-to-br from-primary/5 to-info/30 ${
           src ? '' : 'aspect-[4/3]'
         }`}
       >
         {src ? (
           <img src={src} alt={alt || label} className="block h-auto w-full" />
         ) : (
-          <div className="flex flex-col items-center gap-1.5 text-primary/50">
+          <div className="flex flex-col items-center gap-1.5 text-mute">
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 strokeLinecap="round"

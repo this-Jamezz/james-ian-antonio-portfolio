@@ -18,13 +18,13 @@ function PdfPlaceholder() {
           className="flex items-center gap-1 border-b border-border bg-primary/5 px-2.5 py-1.5"
           aria-hidden="true"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
-          <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-          <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
+          <span className="h-1.5 w-1.5 rounded-full bg-info" />
+          <span className="h-1.5 w-1.5 rounded-full bg-info" />
+          <span className="h-1.5 w-1.5 rounded-full bg-info" />
         </div>
         <div className="flex flex-1 flex-col items-center gap-2 px-4 py-5 text-center">
           <svg
-            className="h-7 w-7 text-accent"
+            className="h-7 w-7 text-ink"
             fill="none"
             stroke="currentColor"
             strokeWidth={1.5}
@@ -38,8 +38,8 @@ function PdfPlaceholder() {
             />
             <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 14.25h4.5v4.5h-4.5z" />
           </svg>
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary/40">PDF</span>
-          <span className="text-xs font-medium text-primary/60">Tap to preview</span>
+          <span className="text-xs font-semibold uppercase tracking-widest text-ink/60">PDF</span>
+          <span className="text-xs font-medium text-ink/80">Tap to preview</span>
         </div>
       </div>
     </div>
@@ -63,9 +63,9 @@ export default function CertificateCard({ cert }) {
 
   return (
     <>
-      <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-white/60 backdrop-blur-md transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+      <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/60 backdrop-blur-md transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
         {/* photo / pdf placeholder */}
-        <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden border-b border-border bg-linear-to-br from-black/5 to-accent/10">
+        <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden border-b border-border bg-linear-to-br from-primary/5 to-info/30">
           {cert.src ? (
             <img
               src={cert.src}
@@ -84,7 +84,7 @@ export default function CertificateCard({ cert }) {
           ) : hasPdf ? (
             <PdfPlaceholder />
           ) : (
-            <div className="flex flex-col items-center gap-1.5 px-4 text-center text-primary/40">
+            <div className="flex flex-col items-center gap-1.5 px-4 text-center text-mute-2">
               <svg
                 className="h-8 w-8"
                 fill="none"
@@ -117,7 +117,7 @@ export default function CertificateCard({ cert }) {
               }`}
             >
               {canHover && (
-                <span className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white shadow-lg">
+                <span className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-bg shadow-lg">
                   <svg
                     className="h-4 w-4"
                     fill="none"
@@ -137,14 +137,14 @@ export default function CertificateCard({ cert }) {
             </button>
           )}
 
-          <span className="absolute right-3 top-3 z-20 rounded-full border border-border bg-white/80 px-3 py-1 text-xs font-semibold tabular-nums text-primary/60 backdrop-blur-md">
+          <span className="absolute right-3 top-3 z-20 rounded-full border border-border bg-surface/80 px-3 py-1 text-xs font-semibold tabular-nums text-mute backdrop-blur-md">
             {cert.year}
           </span>
         </div>
 
         <div className="flex flex-1 flex-col p-6">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-info text-ink">
               <svg
                 className="h-4.5 w-4.5"
                 fill="none"
@@ -160,7 +160,7 @@ export default function CertificateCard({ cert }) {
                 />
               </svg>
             </span>
-            <p className="text-sm font-medium text-primary/60">{cert.issuer}</p>
+            <p className="text-sm font-medium text-mute">{cert.issuer}</p>
           </div>
 
           <h3 className="mt-3 font-bold leading-snug text-primary">
@@ -169,7 +169,7 @@ export default function CertificateCard({ cert }) {
                 type="button"
                 onClick={() => setPreviewOpen(true)}
                 aria-haspopup="dialog"
-                className="cursor-pointer rounded-md text-left transition-colors duration-200 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="cursor-pointer rounded-md text-left transition-colors duration-200 hover:text-primary/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 {cert.title}
               </button>
@@ -178,23 +178,23 @@ export default function CertificateCard({ cert }) {
             )}
           </h3>
 
-          <p className="mt-2 flex-1 text-sm leading-relaxed text-primary/70">
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-mute">
             {cert.description}
           </p>
 
           {/* credential metadata — techy catch: structured data rows */}
           {(cert.issued || cert.credentialId) && (
-            <dl className="mt-4 space-y-1 border-y border-border py-3 text-xs text-primary/60">
+            <dl className="mt-4 space-y-1 border-y border-border py-3 text-xs text-mute">
               {cert.issued && (
                 <div className="flex items-center gap-2">
-                  <dt className="w-24 shrink-0 text-primary/40">issued</dt>
-                  <dd className="font-medium text-primary/80">{cert.issued}</dd>
+                  <dt className="w-24 shrink-0 text-mute-2">issued</dt>
+                  <dd className="font-medium text-mute">{cert.issued}</dd>
                 </div>
               )}
               {cert.credentialId && (
                 <div className="flex items-center gap-2">
-                  <dt className="w-24 shrink-0 text-primary/40">credential</dt>
-                  <dd className="font-medium tracking-wide text-primary/80">
+                  <dt className="w-24 shrink-0 text-mute-2">credential</dt>
+                  <dd className="font-medium tracking-wide text-mute">
                     {cert.credentialId}
                   </dd>
                 </div>
@@ -207,7 +207,7 @@ export default function CertificateCard({ cert }) {
               {cert.skills.map((skill) => (
                 <li
                   key={skill}
-                  className="rounded-full border border-border bg-white/60 px-3 py-0.5 text-xs font-medium text-primary/70"
+                  className="rounded-full border border-border bg-surface/60 px-3 py-0.5 text-xs font-medium text-mute"
                 >
                   {skill}
                 </li>
@@ -221,7 +221,7 @@ export default function CertificateCard({ cert }) {
                 type="button"
                 onClick={() => setPreviewOpen(true)}
                 aria-haspopup="dialog"
-                className="inline-flex w-fit cursor-pointer items-center gap-1.5 rounded-md text-sm font-semibold text-accent transition-colors duration-200 hover:text-accent/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="inline-flex w-fit cursor-pointer items-center gap-1.5 rounded-md text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 View certificate
                 <svg
@@ -244,7 +244,7 @@ export default function CertificateCard({ cert }) {
                 href={cert.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-semibold text-accent transition-colors duration-200 hover:text-accent/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 aria-label={`View ${cert.title} credential`}
               >
                 View credential

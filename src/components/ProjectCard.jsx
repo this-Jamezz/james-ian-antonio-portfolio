@@ -19,7 +19,7 @@ export default function ProjectCard({ project, onOpenDetails }) {
         <ProjectStatus isLive={isLive} />
       </div>
 
-      <p className="mt-1 line-clamp-3 text-sm leading-relaxed text-primary/60">
+      <p className="mt-1 line-clamp-3 text-sm leading-relaxed text-mute">
         {project.description}
       </p>
 
@@ -27,7 +27,7 @@ export default function ProjectCard({ project, onOpenDetails }) {
         {visibleTech.map((item) => (
           <li
             key={item}
-            className="rounded-full border border-border bg-white/60 px-3 py-0.5 text-xs font-medium text-primary/70"
+            className="rounded-full border border-border bg-surface/60 px-3 py-0.5 text-xs font-medium text-mute"
           >
             {item}
           </li>
@@ -41,7 +41,7 @@ export default function ProjectCard({ project, onOpenDetails }) {
               aria-haspopup="dialog"
               aria-label={`Show ${hiddenTechCount} more technologies used in ${project.title}`}
               title={`${project.tech.slice(VISIBLE_TECH_COUNT).join(', ')}`}
-              className="cursor-pointer rounded-full border border-dashed border-primary/25 bg-white/60 px-3 py-0.5 text-xs font-medium text-primary/60 transition-colors duration-200 hover:border-accent/50 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="cursor-pointer rounded-full border border-dashed border-primary/25 bg-surface/60 px-3 py-0.5 text-xs font-medium text-mute transition-colors duration-200 hover:border-info hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               +{hiddenTechCount} others
             </button>
@@ -57,8 +57,8 @@ export default function ProjectCard({ project, onOpenDetails }) {
           aria-haspopup="dialog"
           className={
             isLive
-              ? 'inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent/85 hover:shadow-lg hover:shadow-accent/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
-              : 'inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-white/60 px-4 py-2 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-lg active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
+              ? 'inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-bg transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/85 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+              : 'inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-surface/60 px-4 py-2 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface hover:shadow-lg active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
           }
         >
           <svg

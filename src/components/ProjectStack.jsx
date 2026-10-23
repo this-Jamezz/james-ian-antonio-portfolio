@@ -7,7 +7,7 @@ export default function ProjectStack({ projects, targetId = 'projects' }) {
     <a
       href={`#${targetId}`}
       aria-label="View projects"
-      className="group relative block w-full max-w-[14rem] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent md:max-w-none"
+      className="group relative block w-full max-w-[14rem] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:max-w-none"
     >
       {/* Back card — rotates on hover */}
       <ProjectPreviewCard

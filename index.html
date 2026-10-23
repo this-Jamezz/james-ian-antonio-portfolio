@@ -10,7 +10,22 @@
       name="description"
       content="Portfolio of James Ian Antonio, a full-stack developer building high-quality web and mobile applications with modern tools."
     />
-    <meta name="theme-color" content="#fafaf8" />
+    <!-- set the mode on <html> before first paint so a chosen theme never flashes.
+         default is dark; only an explicit light choice turns it off -->
+    <script>
+      (function () {
+        var dark = true;
+        try {
+          dark = localStorage.getItem('theme') !== 'light';
+        } catch (e) {
+          /* storage blocked — stay dark */
+        }
+        if (dark) document.documentElement.classList.add('dark');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dark ? '#353535' : '#ffffff');
+      })();
+    </script>
+    <meta name="theme-color" content="#353535" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="James Ian Antonio — Full-Stack Developer" />
     <meta
@@ -24,8 +39,8 @@
       content="Portfolio of James Ian Antonio, a full-stack developer building high-quality web and mobile applications with modern tools."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>

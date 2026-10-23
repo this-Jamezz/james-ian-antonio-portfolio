@@ -15,7 +15,7 @@ export default function Projects() {
   return (
     <section id="projects" className="min-h-screen scroll-mt-24 px-6 py-24 flex items-center justify-center">
       <div className="mx-auto w-full max-w-5xl">
-        <p className="text-xs font-semibold uppercase tracking-widest text-accent">Projects</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-mute">Projects</p>
         <h2 className="mt-3 text-4xl font-semibold tracking-tight text-primary md:text-5xl">
           Things I've built
         </h2>

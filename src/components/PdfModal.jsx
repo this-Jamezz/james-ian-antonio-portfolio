@@ -35,12 +35,12 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
         role="dialog"
         aria-modal="true"
         aria-labelledby="pdf-modal-title"
-        className="animate-modal relative flex max-h-[90vh] w-full max-w-3xl flex-col rounded-2xl border border-border bg-white/60 p-6 shadow-lg backdrop-blur-md"
+        className="animate-modal relative flex max-h-[90vh] w-full max-w-3xl flex-col rounded-2xl border border-border bg-surface/60 p-6 shadow-lg backdrop-blur-md"
       >
         {/* header */}
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+            <p className="text-xs font-semibold uppercase tracking-widest text-mute">
               {label}
             </p>
             <h2
@@ -55,7 +55,7 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="-mt-1.5 -mr-1.5 shrink-0 rounded-xl border border-primary/15 bg-white/60 p-2 text-primary/60 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-primary active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="-mt-1.5 -mr-1.5 shrink-0 rounded-xl border border-primary/15 bg-surface/60 p-2 text-mute backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface hover:text-primary active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <svg
               className="h-4 w-4"
@@ -72,14 +72,14 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
         </div>
 
         {/* preview — techy catch: browser chrome dots, viewer toolbar suppressed */}
-        <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-white/40">
+        <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-surface/40">
           <div
-            className="flex items-center gap-1 border-b border-border bg-white/60 px-2.5 py-1.5"
+            className="flex items-center gap-1 border-b border-border bg-surface/60 px-2.5 py-1.5"
             aria-hidden="true"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-            <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
+            <span className="h-1.5 w-1.5 rounded-full bg-info" />
+            <span className="h-1.5 w-1.5 rounded-full bg-info" />
+            <span className="h-1.5 w-1.5 rounded-full bg-info" />
           </div>
           {canEmbed ? (
             <iframe
@@ -91,7 +91,7 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
             /* no inline viewer here — point at the device's own PDF viewer */
             <div className="flex h-[52vh] w-full flex-col items-center justify-center gap-2 bg-white px-6 text-center">
               <svg
-                className="h-8 w-8 text-accent"
+                className="h-8 w-8 text-ink"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={1.5}
@@ -105,8 +105,8 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
                 />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 14.25h4.5v4.5h-4.5z" />
               </svg>
-              <span className="text-xs font-semibold uppercase tracking-widest text-primary/40">PDF</span>
-              <p className="text-sm font-medium text-primary/60">
+              <span className="text-xs font-semibold uppercase tracking-widest text-ink/60">PDF</span>
+              <p className="text-sm font-medium text-ink/80">
                 Open it in your device's PDF viewer.
               </p>
             </div>
@@ -119,14 +119,14 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
             href={src}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-primary/20 bg-white/60 px-5 py-2.5 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-white active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-primary/20 bg-surface/60 px-5 py-2.5 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             Open in new tab
           </a>
           <a
             href={src}
             download={downloadName ?? title}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent/85 hover:shadow-lg hover:shadow-accent/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-bg transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/85 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <svg
               className="h-4 w-4"
