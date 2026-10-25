@@ -12,7 +12,8 @@ const techGroups = [
       { name: 'JavaScript', icon: ICON('javascript') },
       { name: 'TypeScript', icon: ICON('typescript') },
       { name: 'Python', icon: ICON('python') },
-      { name: 'Java', icon: ICON('openjdk') },
+      // Simple Icons dropped Java too — real cup logo shaded via local mask
+      { name: 'Java', mask: 'icon-java' },
     ],
   },
   {

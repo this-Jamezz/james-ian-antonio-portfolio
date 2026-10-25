@@ -112,6 +112,7 @@
   /* logos Simple Icons no longer hosts — masked locally so they tint the same */
   .icon-chatgpt { mask-image: url('/assets/chatgpt.svg'); -webkit-mask-image: url('/assets/chatgpt.svg'); }
   .icon-vscode { mask-image: url('/assets/vscode.svg'); -webkit-mask-image: url('/assets/vscode.svg'); }
+  .icon-java { mask-image: url('/assets/java.svg'); -webkit-mask-image: url('/assets/java.svg'); }
 
   @keyframes enter {
     from {
