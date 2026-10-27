@@ -32,7 +32,7 @@ export default function ResumeButton({ className = '', label = 'Download CV', ic
       <PdfModal
         open={open}
         src={RESUME_SRC}
-        label="Résumé"
+        label="CV"
         title={RESUME_FILENAME.replace(/\.pdf$/i, '')}
         downloadName={RESUME_FILENAME}
         onClose={() => setOpen(false)}
