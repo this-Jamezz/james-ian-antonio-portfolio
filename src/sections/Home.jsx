@@ -23,7 +23,7 @@ export default function Home() {
           </div>
           {/* TODO: add one concrete proof point (users served, load-time win, project outcome) */}
           <p className="font-medium text-base md:text-lg max-w-xl text-mute animate-enter [animation-delay:100ms]">
-            I&rsquo;m James Ian Antonio, a full-stack developer. I design and build web and mobile
+            I&rsquo;m <h1>James Ian Antonio</h1>, a Full-Stack Developer. I design and build web and mobile
             applications end to end — frontend, backend, and everything needed to ship and keep
             them running.
           </p>
