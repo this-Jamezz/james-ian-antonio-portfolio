@@ -23,9 +23,9 @@ export default function Home() {
           </div>
           {/* TODO: add one concrete proof point (users served, load-time win, project outcome) */}
           <p className="font-medium text-base md:text-lg max-w-xl text-mute animate-enter [animation-delay:100ms]">
-            I&rsquo;m James Ian Antonio, a full-stack developer. I design and build web and mobile
-            applications end to end — frontend, backend, and everything needed to ship and keep
-            them running.
+            I'm a full-stack developer specializing in web and mobile development.
+            I turn ideas into practical software solutions by combining thoughtful
+            designs, reliable backend systems, and modern technologies.
           </p>
           <div className="pointer-events-auto animate-enter [animation-delay:200ms]">
             <button
