@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 import Home from './sections/Home';
 import Experience from './sections/Experience';
 import Tech from './sections/Tech';
@@ -17,8 +17,8 @@ function App() {
   }, []);
   return (
     <>
-      <Navbar />
-      <div className="pt-24">
+      <Sidebar />
+      <div className="pt-16 md:pt-0 md:pl-20">
         <Home />
         <Experience />
         <Tech />
@@ -26,7 +26,7 @@ function App() {
         <Projects />
         <Contacts />
       </div>
-      <footer className="border-t border-border px-6 py-8">
+      <footer className="border-t border-border px-6 py-8 md:ml-20">
         <p className="text-center text-sm text-mute">
           © {year} James Ian Antonio
         </p>

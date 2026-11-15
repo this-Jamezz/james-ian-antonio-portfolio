@@ -1,0 +1,267 @@
+import { useState, useEffect, useRef } from 'react';
+import pfp from '../assets/pfp.jpg';
+import ResumeButton from './ResumeButton';
+import LucideIcon from './LucideIcon';
+import { scrollToSectionId } from '../lib/smooth-scroll';
+
+import HomeIcon from 'lucide/dist/esm/icons/house.mjs';
+import BriefcaseIcon from 'lucide/dist/esm/icons/briefcase.mjs';
+import CpuIcon from 'lucide/dist/esm/icons/cpu.mjs';
+import AwardIcon from 'lucide/dist/esm/icons/award.mjs';
+import FolderKanbanIcon from 'lucide/dist/esm/icons/folder-kanban.mjs';
+import MailIcon from 'lucide/dist/esm/icons/mail.mjs';
+import CheckIcon from 'lucide/dist/esm/icons/check.mjs';
+import SunIcon from 'lucide/dist/esm/icons/sun.mjs';
+import MoonIcon from 'lucide/dist/esm/icons/moon.mjs';
+import MenuIcon from 'lucide/dist/esm/icons/menu.mjs';
+import XIcon from 'lucide/dist/esm/icons/x.mjs';
+
+const navItems = [
+  { id: 'home', label: 'Home', hint: 'Overview', icon: HomeIcon },
+  { id: 'experience', label: 'Experience', hint: 'Work history', icon: BriefcaseIcon },
+  { id: 'tech', label: 'Tech', hint: 'Stack & tools', icon: CpuIcon },
+  { id: 'certificates', label: 'Certificates', hint: 'Credentials', icon: AwardIcon },
+  { id: 'projects', label: 'Projects', hint: 'Selected work', icon: FolderKanbanIcon },
+  { id: 'contacts', label: 'Contact', hint: 'Get in touch', icon: MailIcon },
+];
+
+/* hover flyout for the desktop rail: a bold label plus an optional hint line */
+function RailTip({ label, hint }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute left-full top-1/2 z-10 ml-3 -translate-x-1 -translate-y-1/2 whitespace-nowrap rounded-xl border border-border bg-surface/95 px-3 py-2 opacity-0 shadow-xl backdrop-blur-md transition-all duration-150 group-hover:translate-x-0 group-hover:opacity-100"
+    >
+      <span className="block text-xs font-semibold text-primary">{label}</span>
+      {hint && <span className="block text-[11px] font-medium text-mute">{hint}</span>}
+    </span>
+  );
+}
+
+export default function Sidebar() {
+  const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    // matches the .dark default set by the bootstrap script in index.html;
+    // guarded so non-DOM renders (tests/SSR) don't crash
+    if (typeof document === 'undefined') return 'dark';
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  });
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0.1 }
+    );
+
+    navItems.forEach((item) => {
+      const el = document.getElementById(item.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [mobileMenuOpen]);
+
+  const scrollToSection = (id) => {
+    scrollToSectionId(id);
+    setMobileMenuOpen(false);
+  };
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.documentElement.classList.toggle('dark', next === 'dark');
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', next === 'dark' ? '#353535' : '#ffffff');
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      // storage may be blocked — the class toggle above still holds for this visit
+    }
+  };
+
+  return (
+    <>
+      {/* Desktop side rail */}
+      <aside
+        className="fixed inset-y-0 left-0 z-50 hidden w-20 flex-col items-center gap-3 border-r border-border bg-surface/75 py-6 backdrop-blur-xl md:flex"
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('home');
+          }}
+          aria-label="Back to top"
+          className="group relative flex h-11 w-11 items-center justify-center rounded-full transition-transform duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          <img src={pfp} alt="James Ian Antonio" className="h-10 w-10 rounded-full object-cover" />
+          <RailTip label="James Ian Antonio" hint="Full-Stack Developer" />
+        </a>
+
+        <nav className="mt-2 flex flex-1 flex-col items-center gap-2">
+          {navItems.map((item) => {
+            const active = activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-label={item.label}
+                aria-current={active ? 'page' : undefined}
+                className={`group relative flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                  active
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-mute hover:bg-primary/5 hover:text-primary'
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.id);
+                }}
+              >
+                <LucideIcon icon={item.icon} size={20} />
+                <RailTip label={item.label} hint={item.hint} />
+                {active && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute -left-2 top-1/2 h-5 w-1 -translate-y-1/2 rounded-full bg-primary"
+                  />
+                )}
+              </a>
+            );
+          })}
+        </nav>
+
+        <div className="flex flex-col items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Dark mode — switch to light' : 'Light mode — switch to dark'}
+            className="group relative flex h-11 w-11 items-center justify-center rounded-xl text-mute transition-all duration-200 hover:bg-primary/5 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <LucideIcon icon={theme === 'dark' ? SunIcon : MoonIcon} size={20} />
+            <RailTip label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} />
+          </button>
+
+          <span className="group relative block">
+            <ResumeButton
+              className="flex h-11 w-11 items-center justify-center rounded-xl text-mute transition-all duration-200 hover:bg-primary/5 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              label=""
+              iconClassName="h-5 w-5"
+            />
+            <RailTip label="Resume" hint="Preview & download CV" />
+          </span>
+        </div>
+      </aside>
+
+      {/* Mobile top bar */}
+      <header
+        className="fixed top-0 inset-x-0 z-50 flex h-16 items-center justify-between border-b border-border bg-surface/75 px-4 backdrop-blur-xl md:hidden"
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <button
+          ref={buttonRef}
+          type="button"
+          onClick={() => setMobileMenuOpen((v) => !v)}
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
+          className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface/50 transition-all duration-200 hover:bg-surface/80 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          <LucideIcon icon={mobileMenuOpen ? XIcon : MenuIcon} size={20} />
+        </button>
+
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('home');
+          }}
+          className="font-semibold text-primary"
+          aria-label="Back to top"
+        >
+          James Ian Antonio
+        </a>
+
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Dark mode — switch to light' : 'Light mode — switch to dark'}
+          className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface/50 transition-all duration-200 hover:bg-surface/80 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          <LucideIcon icon={theme === 'dark' ? SunIcon : MoonIcon} size={20} />
+        </button>
+      </header>
+
+      {/* Mobile dropdown */}
+      {mobileMenuOpen && (
+        <div
+          ref={menuRef}
+          id="mobile-menu"
+          className="fixed left-4 right-4 top-20 z-50 rounded-2xl border border-border bg-surface py-2 shadow-xl animate-dropdown md:hidden"
+          role="menu"
+          aria-label="Navigation menu"
+        >
+          <nav className="px-2 py-1 space-y-1 flex flex-col">
+            {navItems.map((item) => {
+              const active = activeSection === item.id;
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium cursor-pointer transition-all duration-200 ${
+                    active ? 'bg-primary/10 text-primary' : 'text-mute hover:bg-primary/5 hover:text-primary'
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.id);
+                  }}
+                  role="menuitem"
+                >
+                  <LucideIcon icon={item.icon} size={18} />
+                  <span>{item.label}</span>
+                  {active && (
+                    <LucideIcon icon={CheckIcon} size={14} className="ml-auto text-primary" />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
+          <div className="px-2 pt-2 border-t border-border">
+            <ResumeButton
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-bg bg-primary cursor-pointer transition-all duration-200 hover:opacity-90 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

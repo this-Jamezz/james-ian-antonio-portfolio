@@ -1,76 +1,10 @@
 import { useState } from 'react';
-
-const SIMPLE = 'https://cdn.simpleicons.org';
-// third tone — every brand mark in the stack renders in #d4d4d4
-const INFO_HEX = 'd4d4d4';
-const ICON = (slug) => `${SIMPLE}/${slug}/${INFO_HEX}`;
-
-const techGroups = [
-  {
-    title: 'Programming Languages',
-    items: [
-      { name: 'JavaScript', icon: ICON('javascript') },
-      { name: 'TypeScript', icon: ICON('typescript') },
-      { name: 'Python', icon: ICON('python') },
-      // Simple Icons dropped Java too — real cup logo shaded via local mask
-      { name: 'Java', mask: 'icon-java' },
-    ],
-  },
-  {
-    title: 'Markup & Styling',
-    items: [
-      { name: 'HTML', icon: ICON('html5') },
-      { name: 'CSS', icon: ICON('css') },
-      { name: 'Tailwind CSS', icon: ICON('tailwindcss') },
-    ],
-  },
-  {
-    title: 'Frameworks & Libraries',
-    items: [
-      { name: 'React.js', icon: ICON('react') },
-      { name: 'React Native', icon: ICON('react') },
-      { name: 'Node.js', icon: ICON('nodedotjs') },
-      { name: 'Express.js', icon: ICON('express') },
-    ],
-  },
-  {
-    title: 'Databases & Backend',
-    items: [
-      { name: 'PostgreSQL', icon: ICON('postgresql') },
-      { name: 'Prisma', icon: ICON('prisma') },
-      { name: 'Supabase', icon: ICON('supabase') },
-      { name: 'Firebase', icon: ICON('firebase') },
-      { name: 'REST APIs', icon: null, glyph: 'REST' },
-      { name: 'JWT', icon: null, glyph: 'JWT' },
-    ],
-  },
-  {
-    title: 'Developer Tools',
-    items: [
-      { name: 'Git', icon: ICON('git') },
-      { name: 'GitHub', icon: ICON('github') },
-      { name: 'Postman', icon: ICON('postman') },
-      // Simple Icons dropped these — locally masked so they tint like the rest
-      { name: 'VS Code', mask: 'icon-vscode' },
-      { name: 'Vercel', icon: ICON('vercel') },
-    ],
-  },
-  {
-    title: 'AI & Productivity',
-    items: [
-      { name: 'Claude', icon: ICON('claude') },
-      { name: 'ChatGPT', mask: 'icon-chatgpt' },
-      { name: 'Gemini', icon: ICON('googlegemini') },
-      { name: 'ClickUp', icon: ICON('clickup') },
-    ],
-  },
-];
+import { techGroups } from '../data/tech';
 
 function TechIcon({ name, icon, glyph, mask }) {
   const [failed, setFailed] = useState(false);
 
   if (mask) {
-    // locally masked logo — colored by the third tone in both modes
     return <span aria-hidden="true" className={`brand-icon ${mask} h-10 w-10 text-info`} />;
   }
 

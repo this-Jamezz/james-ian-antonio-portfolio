@@ -93,6 +93,29 @@
     animation: modal 0.25s ease-out;
   }
 
+  /* itshover-style animated stroke icons: unlit = faint third-tone outline,
+     lit = brand color (via --lit set per item in src/data/homeBg.js) + scale;
+     the icon's own motion animation plays while its cell is hovered */
+  .tech-anim {
+    opacity: 0.5;
+    color: var(--color-info);
+    transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  /* dark mode: unlit icons sit even further back so they blend into the bg
+     (must come before .is-lit so hover still raises them to full strength) */
+  .dark .tech-anim {
+    opacity: 0.12;
+  }
+  .is-lit > .tech-anim {
+    opacity: 1;
+    color: var(--lit, var(--color-primary));
+    transform: scale(1.25);
+  }
+  /* icons that would overlap the hero content / portrait are simply removed */
+  .is-hidden {
+    visibility: hidden;
+  }
+
   /* brand icons rendered as alpha masks so the color comes from a single
      text-* utility (the third tone) — identical in light and dark mode */
   .brand-icon {

@@ -21,7 +21,7 @@ export default function Contacts() {
             href="https://www.linkedin.com/in/james-ian-antonio-73b844367"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl border border-primary/20 bg-surface/70 px-6 py-3 text-sm font-bold text-primary backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="rounded-xl border border-primary/20 bg-surface px-6 py-3 text-sm font-bold text-primary transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             LinkedIn
           </a>
