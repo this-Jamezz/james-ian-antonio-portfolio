@@ -14,8 +14,8 @@ export const certificates = [
     description:
       'Issued on October 6, 2026 and valid for five years from the date of issue.',
     skills: ['Python'],
-    src: null,
-    pdf: '/assets/python-its-certificate.pdf',
+    src: '/assets/python-its-certificate.png',
+    pdf: null,
     link: null,
   },
   {
@@ -28,8 +28,8 @@ export const certificates = [
     description:
       'Building complete applications end to end using offline AI-assisted app building workflows.',
     skills: ['App building', 'AI tooling'],
-    src: null,
-    pdf: '/assets/localai-app-builders.pdf',
+    src: '/assets/localai-app-builders.png',
+    pdf: null,
     link: null,
   },
   {
