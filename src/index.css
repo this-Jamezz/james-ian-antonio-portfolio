@@ -54,6 +54,7 @@
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
+      animation-delay: 0s !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
@@ -87,6 +88,12 @@
   .animate-enter {
     opacity: 0;
     animation: enter 0.7s ease-out forwards;
+  }
+
+  /* build-in: the home icon field pops in as a diagonal wave on load
+     (delay set per cell from column + row distance in Home.jsx) */
+  .icon-in {
+    animation: icon-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
 
   .animate-modal {
@@ -145,6 +152,16 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  @keyframes icon-in {
+    from {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
   }
   @keyframes dropdown {

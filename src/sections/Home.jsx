@@ -54,24 +54,33 @@ export default function Home() {
       // smaller active area around the cursor
       const radius = Math.hypot(cellW, cellH) * 1.4;
       spansRef.current.forEach((span, i) => {
-        if (!span) return;
+        // skip icons removed by the keep-clear zones
+        if (!span || span.classList.contains('is-hidden')) return;
         const col = i % cols;
         const row = Math.floor(i / cols);
         const cx = (col + 0.5) * cellW;
         const cy = (row + 0.5) * cellH;
         const dist = Math.hypot(mx - cx, my - cy);
-        if (dist <= radius) {
+        const lit = span.classList.contains('is-lit');
+        if (dist <= radius && !lit) {
+          // entering the active area: light up + play the icon's animation
           span.classList.add('is-lit');
-        } else {
+          animRefs.current[i]?.startAnimation?.();
+        } else if (dist > radius && lit) {
+          // leaving the active area: settle back down
           span.classList.remove('is-lit');
+          animRefs.current[i]?.stopAnimation?.();
         }
       });
     };
 
     const onLeave = () => {
-      spansRef.current.forEach((span) => {
+      spansRef.current.forEach((span, i) => {
         if (!span) return;
-        span.classList.remove('is-lit');
+        if (span.classList.contains('is-lit')) {
+          span.classList.remove('is-lit');
+          animRefs.current[i]?.stopAnimation?.();
+        }
       });
     };
 
@@ -188,22 +197,28 @@ export default function Home() {
           gridTemplateRows: `repeat(${GRID_ROWS}, 1fr)`,
         }}
       >
-        {homeTechSpread.map((item, i) => (
-          <span
-            key={i}
-            ref={(el) => { spansRef.current[i] = el; }}
-            title={item.name}
-            style={item.litHex ? { '--lit': item.litHex } : undefined}
-            onMouseEnter={() => animRefs.current[i]?.startAnimation?.()}
-            onMouseLeave={() => animRefs.current[i]?.stopAnimation?.()}
-            className="relative flex items-center justify-center"
-          >
-            <item.Anim
-              ref={(el) => { animRefs.current[i] = el; }}
-              className="tech-anim relative h-5 w-5"
-            />
-          </span>
-        ))}
+        {homeTechSpread.map((item, i) => {
+          // build-in delay grows with column + row distance → diagonal wave
+          const col = i % cols;
+          const row = Math.floor(i / cols);
+          return (
+            <span
+              key={i}
+              ref={(el) => { spansRef.current[i] = el; }}
+              title={item.name}
+              style={{
+                ...(item.litHex ? { '--lit': item.litHex } : {}),
+                animationDelay: `${(col + row) * 25}ms`,
+              }}
+              className="icon-in relative flex items-center justify-center"
+            >
+              <item.Anim
+                ref={(el) => { animRefs.current[i] = el; }}
+                className="tech-anim relative h-5 w-5"
+              />
+            </span>
+          );
+        })}
       </div>
       <div className="pointer-events-none relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0 max-w-5xl w-full pt-16 md:pt-28">
         {/* md:-mr-56 pulls the text column into the portrait so the text overlaps ~70% of it.
