@@ -105,12 +105,13 @@
     animation: modal 0.25s ease-out;
   }
 
-  /* itshover-style animated stroke icons: unlit = ghost tone (a touch darker
-     than the bg color, full strength — the tone itself does the blending);
-     lit = brand color (via --lit set per item in src/data/homeBg.js) + scale.
+  /* itshover-style animated stroke icons: unlit = ghost tone at 50% opacity so
+     the field reads as a faint background texture; lit = brand color (via
+     --lit set per item in src/data/homeBg.js) + scale + full opacity.
      The icon's own motion animation plays while inside the cursor radius. */
   .tech-anim {
     color: var(--color-ghost);
+    opacity: 0.5;
     transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
   .is-lit > .tech-anim {

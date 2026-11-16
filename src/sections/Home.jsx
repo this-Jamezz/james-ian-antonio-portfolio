@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import heroIcon from '../assets/heroIcon.png';
+import pfp from '../assets/pfp.jpg';
 import { scrollToSectionId } from '../lib/smooth-scroll';
 import { homeBgIcons } from '../data/homeBg';
 
@@ -12,11 +12,6 @@ function deriveCols(width, height) {
 }
 // useLayoutEffect without the SSR warning
 const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
-
-/** Alpha-masked third-tone brand icon (the SVG files carry a brand fill we ignore). */
-function SocialIcon({ icon, className = 'h-6 w-6' }) {
-  return <span aria-hidden="true" className={`brand-icon icon-${icon} ${className}`} />;
-}
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -186,12 +181,12 @@ export default function Home() {
   }, [cols]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-start justify-center px-6 bg-bg overflow-hidden">
+    <section id="home" className="relative min-h-screen flex flex-col items-center px-6 bg-bg overflow-hidden">
       {/* spread of tech-stack icons filling the whole home page, icon-only, no borders, no halo */}
       <div
         ref={containerRef}
         aria-hidden="true"
-        className="pointer-events-auto absolute inset-0 z-0 grid opacity-60 gap-4"
+        className="pointer-events-auto absolute inset-0 z-0 grid gap-4"
         style={{
           gridTemplateColumns: `repeat(${cols}, 1fr)`,
           gridTemplateRows: `repeat(${GRID_ROWS}, 1fr)`,
@@ -220,100 +215,36 @@ export default function Home() {
           );
         })}
       </div>
-      <div className="pointer-events-none relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0 max-w-5xl w-full pt-16 md:pt-28">
-        {/* md:-mr-56 pulls the text column into the portrait so the text overlaps ~70% of it.
-            The column itself ignores pointer events so hovering the portrait works through it;
-            interactive rows opt back in below. */}
-        <div className="pointer-events-none relative z-20 flex-1 min-w-0 flex flex-col items-center md:items-start text-center md:text-left gap-6 md:gap-8 md:-mr-56">
-          <p data-bgzone className="text-xs font-semibold uppercase tracking-widest text-mute animate-enter">Home</p>
-          <div data-bgzone className="flex flex-col items-center md:items-start text-4xl md:text-6xl font-black tracking-tight text-primary animate-enter [animation-delay:50ms]">
-            <p> I solve real-life problems, {" "}</p>
+      <div className="pointer-events-none relative z-10 flex w-full max-w-5xl flex-1 flex-col pt-8 md:pt-14">
+        <p data-bgzone className="self-center text-xs font-semibold uppercase tracking-widest text-mute animate-enter md:self-start">Home</p>
+        {/* details block centers itself in the space under the label — the leftover
+            height becomes the big margin between the tab name and the details */}
+        <div className="flex flex-1 flex-col items-center md:items-start justify-center text-center md:text-left gap-3 md:gap-4 pb-8 md:pb-14">
+          {/* 1:1 portrait directly under the section label — static, no hover effects */}
+          <div ref={portraitRef} className="relative w-22 md:w-28 animate-enter [animation-delay:100ms]">
+            <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-xl bg-info" aria-hidden="true"></div>
+            <img src={pfp} alt="Portrait of James Ian Antonio" className="relative aspect-square w-full rounded-xl bg-bg object-cover shadow-lg" />
+          </div>
+          <div data-bgzone className="flex flex-col items-center md:items-start text-4xl md:text-5xl font-black tracking-tight text-primary animate-enter [animation-delay:200ms]">
+            <p>I am James Ian Antonio,</p>
             {/* third-tone highlight instead of an underline */}
-            <span className="w-fit rounded-lg bg-info px-2.5 text-ink">
-              at scale
+            <span className="w-fit rounded-lg bg-info px-1.5 text-ink">
+              a Web and Mobile Developer
             </span>
           </div>
           {/* TODO: add one concrete proof point (users served, load-time win, project outcome) */}
-          <p data-bgzone className="font-medium text-base md:text-lg max-w-xl text-mute animate-enter [animation-delay:100ms]">
+          <p data-bgzone className="mt-3 md:mt-4 font-medium text-sm md:text-base max-w-xl text-mute animate-enter [animation-delay:300ms]">
             I'm a full-stack developer specializing in web and mobile development.
             I turn ideas into practical software solutions by combining thoughtful
             designs, reliable backend systems, and modern technologies.
           </p>
-          <div className="pointer-events-auto animate-enter [animation-delay:200ms]">
+          <div className="pointer-events-auto mt-3 md:mt-4 animate-enter [animation-delay:400ms]">
             <button
               onClick={() => scrollToSectionId('projects')}
               className="cursor-pointer rounded-xl bg-primary px-6 py-3 text-sm font-bold text-bg transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/85 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               View Projects
             </button>
-          </div>
-          {/* TODO: replace "#" with real profile URLs */}
-          <div className="pointer-events-auto flex flex-col items-center md:items-start gap-3 animate-enter [animation-delay:300ms]">
-            <p data-bgzone className="text-xs font-medium tracking-wide text-mute">
-              Connect with me
-            </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://www.facebook.com/jamesian.antonio.581"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook profile"
-                title="Facebook"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/10 bg-surface text-info transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.04] hover:border-info hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                <SocialIcon icon="facebook" />
-              </a>
-              <a
-                href="https://www.instagram.com/jamezz_iyann/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram profile"
-                title="Instagram"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/10 bg-surface text-info transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.04] hover:border-info hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                <SocialIcon icon="instagram" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/james-ian-antonio-73b844367/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn profile"
-                title="LinkedIn"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/10 bg-surface text-info transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.04] hover:border-info hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                <SocialIcon icon="linkedin" />
-              </a>
-              <a
-                href="https://github.com/this-Jamezz"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub profile"
-                title="GitHub"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/10 bg-surface text-info transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.04] hover:border-info hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                <SocialIcon icon="github" />
-              </a>
-              <a
-                href="https://ph.jobstreet.com/profiles/jamesian-antonio-9zq6gj4387"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="JobStreet profile"
-                title="JobStreet"
-                className="flex h-10 items-center gap-2 px-4 rounded-xl border border-primary/10 bg-surface text-info transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.04] hover:border-info hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span className="text-sm font-semibold text-primary">JobStreet</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        {/* portrait starts under the headline; hovering it raises the whole stack above the text */}
-        <div ref={portraitRef} className="pointer-events-auto relative z-10 shrink-0 animate-enter [animation-delay:150ms] hover:z-30">
-          <div className="group relative w-56 md:w-80">
-            <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl bg-info transition-transform duration-500 group-hover:translate-x-4 group-hover:translate-y-4" aria-hidden="true"></div>
-            <img src={heroIcon} alt="Portrait of James Ian Antonio" className="relative aspect-[4/5] w-full rounded-3xl bg-bg object-cover object-top opacity-70 shadow-lg transition-[transform,opacity] duration-500 group-hover:-translate-y-1 group-hover:scale-[1.02] group-hover:opacity-100" />
           </div>
         </div>
       </div>
