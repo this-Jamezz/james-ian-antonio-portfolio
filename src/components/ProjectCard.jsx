@@ -11,7 +11,7 @@ export default function ProjectCard({ project, onOpenDetails }) {
   const hiddenTechCount = project.tech.length - visibleTech.length;
 
   return (
-    <article className="group flex h-full flex-col">
+    <article className="group flex h-full flex-col md:odd:last:col-span-2">
       <ProjectPreviewCard src={project.src} label={project.label} showChrome />
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-2">

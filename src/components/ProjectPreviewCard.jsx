@@ -12,12 +12,20 @@ export default function ProjectPreviewCard({ src, label, alt, className = '', sh
       )}
 
       <div
-        className={`flex w-full items-center justify-center bg-linear-to-br from-primary/5 to-info/30 ${
+        className={`relative flex w-full items-center justify-center bg-linear-to-br from-primary/5 to-info/30 ${
           src ? '' : 'aspect-[4/3]'
         }`}
       >
         {src ? (
-          <img src={src} alt={alt || label} className="block h-auto w-full" />
+          label === 'iManage' ? (
+            <svg viewBox="0 0 1678 937" role="img" aria-label={alt || label} className="block h-auto w-full">
+              <image href={src} width="1678" height="937" />
+              <image href="/assets/imanage-mark.svg" x="64" y="735" width="130" height="130" />
+              <text x="220" y="835" fill="white" fontFamily="Arial, sans-serif" fontSize="92" fontWeight="700">iMANAGE</text>
+            </svg>
+          ) : (
+            <img src={src} alt={alt || label} className="block h-auto w-full" />
+          )
         ) : (
           <div className="flex flex-col items-center gap-1.5 text-mute">
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

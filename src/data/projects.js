@@ -1,5 +1,5 @@
-import FoundNestThumbNail from '../assets/FoundNestThumbnail.jpg';
-import iManageThumbnail from '../assets/iManageThumbnail.jpg';
+import FoundNestThumbNail from '../assets/FoundNestThumbnail-solid.png';
+import iManageThumbnail from '../assets/iManageThumbnail-uniform.png';
 
 // TODO: uncomment ClinicMate below once it has a real screenshot.
 // Set `link` to the live URL — '#' or null marks the project as not deployed.
