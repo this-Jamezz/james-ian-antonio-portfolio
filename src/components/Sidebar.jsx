@@ -64,7 +64,8 @@ export default function Sidebar({ railOpen, setRailOpen }) {
         menuRef.current &&
         !menuRef.current.contains(event.target) &&
         buttonRef.current &&
-        !buttonRef.current.contains(event.target)
+        !buttonRef.current.contains(event.target) &&
+        !event.target.closest('[role="dialog"]')
       ) {
         setMobileMenuOpen(false);
       }
@@ -204,7 +205,7 @@ export default function Sidebar({ railOpen, setRailOpen }) {
           aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-menu"
-          className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface/50 transition-all duration-200 hover:bg-surface/80 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface/50 text-primary transition-all duration-200 hover:bg-surface/80 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <LucideIcon icon={PanelLeftIcon} size={20} />
         </button>
@@ -221,14 +222,7 @@ export default function Sidebar({ railOpen, setRailOpen }) {
           James Ian Antonio
         </a>
 
-        <button
-          type="button"
-          onClick={toggleTheme}
-          aria-label={theme === 'dark' ? 'Dark mode — switch to light' : 'Light mode — switch to dark'}
-          className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface/50 transition-all duration-200 hover:bg-surface/80 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
-          <LucideIcon icon={theme === 'dark' ? SunIcon : MoonIcon} size={20} />
-        </button>
+        <span className="w-10" aria-hidden="true" />
       </header>
 
       {/* Mobile dropdown */}
@@ -236,7 +230,7 @@ export default function Sidebar({ railOpen, setRailOpen }) {
         <div
           ref={menuRef}
           id="mobile-menu"
-          className="fixed left-4 right-4 top-24 z-50 rounded-2xl border border-border bg-surface py-2 shadow-xl animate-dropdown md:hidden"
+          className="fixed left-4 right-4 top-24 z-50 max-h-[calc(100dvh-7rem)] overflow-y-auto rounded-2xl border border-border bg-surface py-2 shadow-xl animate-dropdown md:hidden"
           role="menu"
           aria-label="Navigation menu"
         >
@@ -266,6 +260,19 @@ export default function Sidebar({ railOpen, setRailOpen }) {
             })}
           </nav>
           <div className="px-2 pt-2 border-t border-border">
+            <button
+              type="button"
+              role="switch"
+              aria-checked={theme === 'dark'}
+              aria-label="Dark mode"
+              onClick={toggleTheme}
+              className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <span className="flex items-center gap-3"><LucideIcon icon={theme === 'dark' ? MoonIcon : SunIcon} size={18} />{theme === 'dark' ? 'Dark mode' : 'Light mode'}</span>
+              <span aria-hidden="true" className={`flex h-6 w-11 items-center rounded-full p-1 transition-colors duration-200 ${theme === 'dark' ? 'bg-primary' : 'bg-primary/25'}`}>
+                <span className={`h-4 w-4 rounded-full bg-bg transition-transform duration-200 ${theme === 'dark' ? 'translate-x-5' : ''}`} />
+              </span>
+            </button>
             <ResumeButton
               className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-bg bg-primary cursor-pointer transition-all duration-200 hover:opacity-90 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             />

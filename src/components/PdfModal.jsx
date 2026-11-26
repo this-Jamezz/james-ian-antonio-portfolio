@@ -35,7 +35,7 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
         role="dialog"
         aria-modal="true"
         aria-labelledby="pdf-modal-title"
-        className="animate-modal relative flex max-h-[90vh] w-full max-w-3xl flex-col rounded-2xl border border-border bg-surface/60 p-6 shadow-lg backdrop-blur-md"
+        className="animate-modal relative flex max-h-[calc(100dvh-2rem)] w-full max-w-3xl flex-col overflow-y-auto rounded-2xl border border-border bg-surface/60 p-6 shadow-lg backdrop-blur-md"
       >
         {/* header */}
         <div className="flex items-start justify-between gap-4">
@@ -72,7 +72,7 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
         </div>
 
         {/* preview — techy catch: browser chrome dots, viewer toolbar suppressed */}
-        <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-surface/40">
+        <div className="mt-4 shrink-0 overflow-hidden rounded-2xl border border-border bg-surface/40">
           <div
             className="flex items-center gap-1 border-b border-border bg-surface/60 px-2.5 py-1.5"
             aria-hidden="true"
@@ -114,7 +114,7 @@ export default function PdfModal({ open, src, label, title, downloadName, onClos
         </div>
 
         {/* footer actions */}
-        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-end">
+        <div className="mt-5 flex shrink-0 flex-col gap-2 sm:flex-row sm:justify-end">
           <a
             href={src}
             target="_blank"
