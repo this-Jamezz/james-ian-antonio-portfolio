@@ -42,9 +42,11 @@ export default function About() {
         <h2 className="mt-3 text-4xl font-semibold tracking-tight text-primary md:text-5xl">A little more about me</h2>
         <div className="mt-10 grid items-center gap-10 md:grid-cols-2">
           <div className="order-2 md:order-1" aria-live="polite" aria-atomic="true">
-            <p className="text-xs font-semibold uppercase tracking-widest text-mute">{String(selected + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}</p>
-            <h3 className="mt-3 text-2xl font-bold text-primary">{photo.title}</h3>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-mute">{photo.description}</p>
+            <div key={selected} className="scroll-reveal">
+              <p className="text-xs font-semibold uppercase tracking-widest text-mute">{String(selected + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}</p>
+              <h3 className="mt-3 text-2xl font-bold text-primary">{photo.title}</h3>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-mute">{photo.description}</p>
+            </div>
             <div className="mt-8 flex items-center gap-2" aria-label="Choose a photo">
               {photos.map((item, index) => (
                 <button key={item.title} type="button" onClick={() => setSelected(index)} aria-label={`Show photo ${index + 1}: ${item.title}`} aria-current={index === selected ? 'true' : undefined} className={`h-3 rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${index === selected ? 'w-8 bg-primary' : 'w-3 bg-primary/25 hover:bg-primary/50'}`} />
@@ -57,7 +59,7 @@ export default function About() {
                 <img src={previousPhoto.image} alt="" aria-hidden="true" draggable="false" className="pointer-events-none absolute inset-0 h-full w-full -translate-x-3 -rotate-8 rounded-2xl border border-border object-cover opacity-40 group-hover:opacity-55 motion-safe:transition motion-safe:duration-200 motion-safe:group-hover:-translate-x-5 motion-safe:group-hover:-rotate-10" />
                 <img src={nextPhoto.image} alt="" aria-hidden="true" draggable="false" className="pointer-events-none absolute inset-0 h-full w-full translate-x-3 rotate-8 rounded-2xl border border-border object-cover opacity-40 group-hover:opacity-55 motion-safe:transition motion-safe:duration-200 motion-safe:group-hover:translate-x-5 motion-safe:group-hover:rotate-10" />
                 <motion.div key={selected} drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={0.2} onDragEnd={(_, info) => { if (Math.abs(info.offset.x) > 50) move(info.offset.x < 0 ? 1 : -1); }} className="relative cursor-grab touch-pan-y overflow-hidden rounded-2xl border border-border bg-surface shadow-xl active:cursor-grabbing">
-                  <img src={photo.image} alt={photo.alt} draggable="false" className="aspect-[4/5] w-full object-cover" />
+                  <img src={photo.image} alt={photo.alt} draggable="false" className="scroll-reveal aspect-[4/5] w-full object-cover" />
                 </motion.div>
               </div>
             </div>

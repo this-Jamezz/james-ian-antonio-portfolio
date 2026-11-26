@@ -5,6 +5,15 @@ import iManageThumbnail from '../assets/iManageThumbnail-uniform.png';
 // Set `link` to the live URL — '#' or null marks the project as not deployed.
 export const projects = [
   {
+    label: 'Linewise',
+    src: null,
+    title: 'Linewise',
+    description:
+      'An offline-first AI-powered quality assurance platform with transcription, call scoring, PII redaction, and coaching insights.',
+    tech: ['Whisper', 'Qwen 2.5 3B', 'Ollama'],
+    link: 'https://linewise-hackathon.vercel.app/',
+  },
+  {
     label: 'FoundNest',
     src: FoundNestThumbNail,
     title: 'FoundNest',

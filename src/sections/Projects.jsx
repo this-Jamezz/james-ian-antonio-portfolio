@@ -20,7 +20,7 @@ export default function Projects() {
           Things I've built
         </h2>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-2">
+        <div className="mt-10 grid auto-rows-fr gap-8 md:grid-cols-2">
           {projects.map((project, index) => (
             <ProjectCard
               key={project.title}

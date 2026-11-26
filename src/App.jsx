@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Home from './sections/Home';
 import About from './sections/About';
@@ -16,6 +16,28 @@ function App() {
   useEffect(() => {
     initSmoothScroll();
     return () => destroySmoothScroll();
+  }, []);
+
+  useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+
+    const sections = document.querySelectorAll('section:not(#home):not(#experience) > div:first-child, [data-scroll-reveal]');
+    sections.forEach((section) => section.classList.add('scroll-pending'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove('scroll-pending');
+        entry.target.classList.add('scroll-reveal');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => {
+      observer.disconnect();
+      sections.forEach((section) => section.classList.remove('scroll-pending', 'scroll-reveal'));
+    };
   }, []);
   return (
     <>

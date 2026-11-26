@@ -95,6 +95,18 @@
     animation: enter 0.7s ease-out forwards;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-pending {
+      opacity: 0.45;
+      filter: blur(4px);
+      transform: translateY(24px) scale(0.98);
+    }
+
+    .scroll-reveal {
+      animation: scroll-reveal 1.1s ease-out;
+    }
+  }
+
   /* build-in: the home icon field pops in as a diagonal wave on load
      (delay set per cell from column + row distance in Home.jsx) */
   .icon-in {
@@ -153,6 +165,23 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  @keyframes scroll-reveal {
+    0% {
+      opacity: 0.45;
+      filter: blur(4px);
+      transform: translateY(24px) scale(0.98);
+    }
+    55% {
+      opacity: 0.9;
+      filter: blur(4px);
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) scale(1);
     }
   }
   @keyframes icon-in {
